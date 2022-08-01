@@ -1,0 +1,60 @@
+﻿@model Teacher
+
+
+<h1 class="display-1 text-center text-danger">
+    Create Teacher
+</h1>
+<div class="container">
+    <form method="post" asp-controller="Teachers" asp-action="AddTeacher" enctype="multipart/form-data">
+        <div class="row justify-content-around">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3 col-5">
+                <label asp-for="FullName" class="form-label"></label>
+                <input type="text" class="form-control " aria-describedby="NameHelp" asp-for="FullName">
+                <span asp-validation-for="FullName" class=" text-danger"></span>
+            </div>
+
+            <div class="mb-3 col-5">
+                <label asp-for="Degree" class="form-label"></label>
+                <input type="text" class="form-control" aria-describedby="NameHelp" asp-for="Degree">
+                <span asp-validation-for="Degree" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3 col-5">
+                <label asp-for="Salary" class="form-label"></label>
+                <input type="number" class="form-control" aria-describedby="NameHelp" asp-for="Salary">
+                <span asp-validation-for="Salary" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3 col-5">
+                <label asp-for="ImageUrl" class="form-label"></label>
+                <input asp-for="ImageUrl" type="file" id="imageFile" name="imageFile" onchange="AddImage()" accept=".png,.jpg .jpeg" class="form-control">
+            </div>
+
+            <div class="mb-3 col-5">
+                <label asp-for="DepartmentID" class="form-label"></label>
+                <select asp-for="DepartmentID" class="form-control" asp-items="@(new SelectList(ViewBag.AllDepartments,"Id","Name"))">
+                    <option disabled selected>Select ...</option>
+                </select>
+            </div>
+            <div class="col-5 align-item">
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </div>
+            <div class="mb-3 col-5 card">
+                <img src="" id="empImage" />
+            </div>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts{
+<script>
+    function AddImage(){
+        document.getElementById('empImage').src= window.URL.createObjectURL(document.getElementById('imageFile').files[0])
+    }
+</script>
+}

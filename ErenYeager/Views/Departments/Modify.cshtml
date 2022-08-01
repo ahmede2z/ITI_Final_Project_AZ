@@ -1,0 +1,29 @@
+﻿@model Department
+
+
+<h1 class="display-1 text-center text-danger">
+    Create Department
+</h1>
+
+
+<form method="post" class="col-6" asp-controller="Departments" asp-action="ModifyDepartment">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input hidden asp-for="Id" />
+
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input type="text" class="form-control" aria-describedby="NameHelp" asp-for="Name">
+        <span asp-validation-for="Name" class=" text-danger"></span>
+
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input type="text" class="form-control" aria-describedby="NameHelp" asp-for="Description">
+        <span asp-validation-for="Description" class=" text-danger"></span>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+

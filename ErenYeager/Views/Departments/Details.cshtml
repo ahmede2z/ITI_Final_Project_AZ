@@ -1,0 +1,64 @@
+﻿@model Department
+
+<h1 class="display-1 text-center text-danger">
+    Details
+</h1>
+
+
+<dl>
+    <dt>@Html.DisplayNameFor(dep=>dep.Id)</dt>
+    <dd>@Html.DisplayFor(dep=>dep.Id)</dd>
+
+    <dt>@Html.DisplayNameFor(dep=>dep.Name)</dt>
+    <dd>@Html.DisplayFor(dep=>dep.Name)</dd>
+
+    <dt>@Html.DisplayNameFor(dep=>dep.Description)</dt>
+    <dd>@Html.DisplayFor(dep=>dep.Description)</dd>
+</dl>
+
+<a asp-controller="Departments" asp-action="GetIndexView">
+    <button type="submit" class="btn btn-primary">
+        All Departments
+    </button>
+</a>
+
+
+<div class="container">
+    <h3 class="display-4  text-danger">Teachers:</h3>
+
+    @if (Model.Teachers.Count > 0) {
+        <div class="row justify-content-evenly">
+            @foreach (var tec in Model.Teachers) {
+                <div class="card card-dark bg-dark text-white col-3 m-4">
+                    <img src="@tec.ImageUrl" class="card-img-top img-fluid w-100" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@tec.FullName</h5>
+                    </div>
+                    <table class="table text-white-50 table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="row">@Html.DisplayNameFor(dep=>dep.Teachers.FirstOrDefault().Id)</th>
+                                <td>@tec.Id</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@Html.DisplayNameFor(dep=>dep.Teachers.FirstOrDefault().FullName)</th>
+                                <td>@tec.FullName</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@Html.DisplayNameFor(dep=>dep.Teachers.FirstOrDefault().Degree)</th>
+                                <td>@tec.Degree</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@Html.DisplayNameFor(dep=>dep.Teachers.FirstOrDefault().Salary)</th>
+                                <td>@tec.Salary</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    } else {
+        <h4 class="display-4 alert alert-danger">There is no data to display.</h4>
+    }
+</div>
+

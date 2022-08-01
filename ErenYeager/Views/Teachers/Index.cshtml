@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Teacher>
+
+<!--<partial name="_Welcome" />-->
+
+<h1 class="display-1 text-center text-danger">
+    Teachers
+</h1>
+
+@if (Model.ToList().Count > 0) {
+
+    <div class="row mt-4 justify-content-between">
+        <form class="col-3 justify-content-start" method="get" asp-controller="Teachers" asp-action="GetIndexView">
+
+            <div class="input-group  mb-3">
+                <input type="text" name="search" value="@ViewBag.CurrentSearch" class="form-control" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success input-group-btn"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+        <div class="col-7 d-flex justify-content-end">
+            <form method="get" asp-controller="Teachers" asp-action="GetIndexView">
+                <div class="input-group  mb-3">
+                    <label class="form-control">Page Size</label>
+                    <input type="number" name="pageSize" value="@ViewBag.CurrentpageSize" class="form-control" placeholder="Search" aria-label="Search">
+                    <label class="form-control">Page Number</label>
+                    <input type="number" name="pageNumber" value="@ViewBag.CurrentpageNumber" class="form-control" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success input-group-btn"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover table-dark">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="FullName"
+                   asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                        <div class="d-flex justify-content-between">
+                            <div>@Html.DisplayNameFor(e=> e.FullName)</div>
+                            <div>
+                                <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="FullName"
+                               asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                                    <i class="bi bi-arrow-up-short"></i>
+                                </a>
+                                <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="FullName"
+                               asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                                    <i class="bi bi-arrow-down-short"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </th>
+                <th>
+                    <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="Position"
+                   asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                        <div class="d-flex justify-content-between">
+                            <div>@Html.DisplayNameFor(e=> e.Degree)</div>
+                            <div>
+                                <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="Position"
+                               asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                                    <i class="bi bi-arrow-up-short"></i>
+                                </a>
+                                <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="Position"
+                               asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                                    <i class="bi bi-arrow-down-short"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </a>
+
+                </th>
+                <th>
+                    <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="Salary"
+                   asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                        <div class="d-flex justify-content-between">
+                            <div>@Html.DisplayNameFor(e=> e.Salary)</div>
+                            <div>
+                                <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="Salary"
+                               asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                                    <i class="bi bi-arrow-up-short"></i>
+                                </a>
+                                <a asp-controller="Teachers" asp-action="GetIndexView" asp-route-sortType="Salary"
+                               asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" style="text-decoration: none">
+                                    <i class="bi bi-arrow-down-short"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model) {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FullName</td>
+                    <td>@item.Degree</td>
+                    <td>@item.Salary</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-controller="Teachers" asp-action="GetDetailsView" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-success"> Details</button>
+                            </a>
+
+                            <a asp-controller="Teachers" asp-action="GetDeleteTeacher" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-danger"> Delete</button>
+                            </a>
+
+                            <a asp-controller="Teachers" asp-action="GetModifyTeacher" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-primary">Modify</button>
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-center">
+                    <strong>
+                        Total
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+                        @Model.Sum(tec  =>tec.Salary)
+                    </strong>
+                </td>
+                <td colspan="2"> </td>
+            </tr>
+        </tfoot>
+    </table>
+
+} else {
+    <h4 class="display-4 alert alert-danger">There is no data to display.</h4>
+}

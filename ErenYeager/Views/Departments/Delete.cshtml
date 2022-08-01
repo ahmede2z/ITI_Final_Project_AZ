@@ -1,0 +1,32 @@
+﻿@model Department
+
+<h1 class="display-1 text-center text-danger">
+    Delete Department
+</h1>
+
+
+<dl>
+    <dt>@Html.DisplayNameFor(dep=>dep.Id)</dt>
+    <dd>@Html.DisplayFor(dep=>dep.Id)</dd>
+
+    <dt>@Html.DisplayNameFor(dep=>dep.Name)</dt>
+    <dd>@Html.DisplayFor(dep=>dep.Name)</dd>
+
+    <dt>@Html.DisplayNameFor(dep=>dep.Description)</dt>
+    <dd>@Html.DisplayFor(dep=>dep.Description)</dd>
+</dl>
+
+
+<form method="post" asp-controller="Departments" asp-action="DeleteDepartment">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Delete
+    </button>
+</form>
+
+<a asp-controller="Departments" asp-action="GetIndexView">
+    <button type="submit" class="btn btn-primary">
+        All Department
+    </button>
+</a>

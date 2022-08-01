@@ -1,0 +1,51 @@
+﻿@model Teacher
+
+<h1 class="display-1 text-center text-danger">
+    Delete Teacher
+</h1>
+
+
+<div class="card card-dark bg-dark text-white" style="width: 18rem;">
+    <img src="@Html.DisplayFor(tec=>tec.ImageUrl)" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(tec=>tec.FullName)</h5>
+    </div>
+    <table class="table text-white-50 table-hover">
+        <tbody>
+            <tr>
+                <th scope="row">@Html.DisplayNameFor(tec=>tec.Id)</th>
+                <td>@Html.DisplayFor(tec=>tec.Id)</td>
+            </tr>
+        <th scope="row">@Html.DisplayNameFor(tec=>tec.FullName)</th>
+        <td>@Html.DisplayFor(tec=>tec.FullName)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(tec=>tec.Degree)</th>
+            <td>@Html.DisplayFor(tec=>tec.Degree)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(tec=>tec.Salary)</th>
+            <td>@Html.DisplayFor(tec=>tec.Salary)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(tec=>tec.Department)</th>
+            <td>
+                @Html.DisplayFor(tec=>tec.Department.Description)
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row card-body d-felx justify-content-around align-content-center align-items-center">
+        <form method="post" asp-controller="Teachers" class="d-inline-flex col" asp-action="DeleteTeacher">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                Delete
+            </button>
+        </form>
+        <a asp-controller="Teachers" class="col-7" asp-action="GetIndexView">
+            <button type="submit" class="btn btn-primary">
+                All Teachers
+            </button>
+        </a>
+    </div>
+</div>
